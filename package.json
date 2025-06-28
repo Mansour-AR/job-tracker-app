@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test-root": "node test-root.js"
+  },
+  "dependencies": {
+    "morgan": "^1.10.0",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.11"
+  }
+}
