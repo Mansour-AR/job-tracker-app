@@ -33,6 +33,19 @@ const statusBgColors = {
   'Archived': 'bg-gray-100 text-gray-700',
 };
 
+// Status color mapping function
+const getStatusColor = (status) => {
+  const statusColors = {
+    'applied': 'bg-blue-100 text-blue-800',
+    'scheduled': 'bg-green-100 text-green-800',
+    'interviewed': 'bg-yellow-100 text-yellow-800',
+    'rejected': 'bg-red-100 text-red-800',
+    'offer': 'bg-purple-100 text-purple-800',
+    'archived': 'bg-gray-100 text-gray-800'
+  };
+  return statusColors[status] || 'bg-gray-100 text-gray-800';
+};
+
 export default function Dashboard() {
   const [jobs, setJobs] = useState([]);
   const [loadingJobs, setLoadingJobs] = useState(true);

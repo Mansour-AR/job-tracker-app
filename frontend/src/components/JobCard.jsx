@@ -8,27 +8,34 @@ import {
   ClockIcon
 } from '@heroicons/react/24/outline';
 
-const statusColors = {
-  'Applied': 'border-blue-500',
-  'Interview Scheduled': 'border-yellow-500',
-  'Interviewed': 'border-orange-500',
-  'Offer Received': 'border-green-500',
-  'Rejected': 'border-red-500',
-  'Archived': 'border-gray-500',
+// Status color mapping function
+const getStatusColor = (status) => {
+  const statusColors = {
+    'applied': 'bg-blue-100 text-blue-800',
+    'scheduled': 'bg-green-100 text-green-800',
+    'interviewed': 'bg-yellow-100 text-yellow-800',
+    'rejected': 'bg-red-100 text-red-800',
+    'offer': 'bg-purple-100 text-purple-800',
+    'archived': 'bg-gray-100 text-gray-800'
+  };
+  return statusColors[status] || 'bg-gray-100 text-gray-800';
 };
 
-const statusBgColors = {
-  'Applied': 'bg-blue-100 text-blue-700',
-  'Interview Scheduled': 'bg-yellow-100 text-yellow-700',
-  'Interviewed': 'bg-orange-100 text-orange-700',
-  'Offer Received': 'bg-green-100 text-green-700',
-  'Rejected': 'bg-red-100 text-red-700',
-  'Archived': 'bg-gray-100 text-gray-700',
+// Border color mapping for card borders
+const getBorderColor = (status) => {
+  const borderColors = {
+    'Applied': 'border-blue-500',
+    'Interview Scheduled': 'border-yellow-500',
+    'Interviewed': 'border-orange-500',
+    'Offer Received': 'border-green-500',
+    'Rejected': 'border-red-500',
+    'Archived': 'border-gray-500',
+  };
+  return borderColors[status] || 'border-gray-300';
 };
 
 const JobCard = ({ job, onEdit, onDelete }) => {
-  const borderColor = statusColors[job.status] || 'border-gray-300';
-  const statusBgColor = statusBgColors[job.status] || 'bg-gray-100 text-gray-700';
+  const borderColor = getBorderColor(job.status);
   
   return (
     <div className={`bg-white shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}>
