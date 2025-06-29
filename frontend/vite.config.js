@@ -9,5 +9,19 @@ export default defineConfig({
     'process.env': {}
   },
   // Expose environment variables to the client
-  envPrefix: 'VITE_'
+  envPrefix: 'VITE_',
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          icons: ['@heroicons/react']
+        }
+      }
+    }
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
+  }
 })

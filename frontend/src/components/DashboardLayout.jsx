@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
+import Sidebar from './Sidebar.jsx';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import AuthButtons from './AuthButtons';
+import AuthButtons from './AuthButtons.jsx';
 
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
