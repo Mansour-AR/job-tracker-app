@@ -199,15 +199,15 @@ export default function Dashboard() {
             {/* Overview Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
               <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.totalJobs}</div>
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.totalJobs || 0}</div>
                 <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
               </div>
               <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-green-500 hover:scale-105 transition-transform duration-200">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.activeApplications}</div>
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.activeApplications || 0}</div>
                 <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Active Applications</div>
               </div>
               <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.successRate}%</div>
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.successRate || 0}%</div>
                 <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Success Rate</div>
               </div>
             </div>
