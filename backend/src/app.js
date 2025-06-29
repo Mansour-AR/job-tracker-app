@@ -36,7 +36,7 @@ app.get('/debug', (req, res) => {
     message: 'Express server is working!',
     timestamp: new Date().toISOString(),
     env: process.env.NODE_ENV || 'development',
-    backendUrl: 'https://job-tracker-platform.onrender.com'
+    backendUrl: 'https://job-tracker-app-mg5v.onrender.com'
   });
 });
 
