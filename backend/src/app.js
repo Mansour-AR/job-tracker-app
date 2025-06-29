@@ -23,8 +23,8 @@ const allowedOrigins = [
   'http://localhost:4173', // Vite preview server
   // Vercel domains (will be automatically allowed)
   /^https:\/\/.*\.vercel\.app$/,
-  // Add your specific Vercel domain here
-  'https://your-app-name.vercel.app', // Replace with your actual Vercel domain
+  // Add your specific Vercel domain here - replace with your actual domain
+  // 'https://your-actual-app-name.vercel.app', // Replace with your actual Vercel domain
   // Netlify domains (if you decide to use Netlify instead)
   /^https:\/\/.*\.netlify\.app$/,
   'https://your-app-name.netlify.app'  // Replace with your actual Netlify domain
@@ -34,6 +34,9 @@ app.use(cors({
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
+    
+    // Log all origins for debugging
+    console.log('Request origin:', origin);
     
     // Check if origin matches any of the allowed patterns
     const isAllowed = allowedOrigins.some(allowedOrigin => {
@@ -46,9 +49,11 @@ app.use(cors({
     });
     
     if (isAllowed) {
+      console.log('CORS: Origin allowed:', origin);
       callback(null, true);
     } else {
       console.log('CORS blocked origin:', origin);
+      console.log('Allowed origins:', allowedOrigins);
       callback(new Error('Not allowed by CORS'));
     }
   },
