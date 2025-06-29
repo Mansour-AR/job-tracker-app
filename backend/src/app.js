@@ -16,59 +16,19 @@ app.get('/debug', (req, res) => {
   });
 });
 
-// CORS configuration for both development and production
-const allowedOrigins = [
-  'http://localhost:5173', // Vite dev server
-  'http://localhost:3000', // Alternative dev port
-  'http://localhost:4173', // Vite preview server
-  // Specific Vercel domain
-  'https://job-tracker-app-ivory.vercel.app',
-  // Vercel domains (will be automatically allowed)
-  /^https:\/\/.*\.vercel\.app$/
-];
-
-// CORS middleware
-app.use(cors({ 
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
-    if (!origin) return callback(null, true);
-    
-    // Check if origin matches any of the allowed patterns
-    const isAllowed = allowedOrigins.some(allowedOrigin => {
-      if (typeof allowedOrigin === 'string') {
-        return origin === allowedOrigin;
-      } else if (allowedOrigin instanceof RegExp) {
-        return allowedOrigin.test(origin);
-      }
-      return false;
-    });
-    
-    if (isAllowed) {
-      callback(null, true);
-    } else {
-      console.log('CORS blocked origin:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+// CORS configuration - simplified and more permissive for debugging
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    'http://localhost:4173',
+    'https://job-tracker-app-ivory.vercel.app',
+    'https://*.vercel.app'
+  ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept']
 }));
-
-// Additional CORS headers for preflight requests
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://job-tracker-app-ivory.vercel.app');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  
-  // Handle preflight requests
-  if (req.method === 'OPTIONS') {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
 
 // Middleware
 app.use(express.json());

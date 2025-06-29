@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Connection Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Backend Connection Test</h1>
+    <p>This page will test the connection to your backend and CORS configuration.</p>
+    
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <button onclick="testCORS()">Test CORS with Login</button>
+    <button onclick="testEnvironment()">Test Environment Variables</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const backendUrl = 'https://job-tracker-app-backend.onrender.com';
+        
+        function addResult(message, isSuccess = true) {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `test-result ${isSuccess ? 'success' : 'error'}`;
+            resultDiv.innerHTML = `<strong>${isSuccess ? '✅' : '❌'}</strong> ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        async function testBackend() {
+            addResult('Testing backend connection...');
+            try {
+                const response = await fetch(`${backendUrl}/debug`);
+                const data = await response.json();
+                addResult(`Backend is accessible! Response: ${JSON.stringify(data)}`);
+            } catch (error) {
+                addResult(`Backend connection failed: ${error.message}`, false);
+            }
+        }
+
+        async function testCORS() {
+            addResult('Testing CORS with login endpoint...');
+            try {
+                const response = await fetch(`${backendUrl}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://job-tracker-app-ivory.vercel.app'
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'testpassword'
+                    })
+                });
+                
+                const data = await response.text();
+                addResult(`CORS test completed! Status: ${response.status}, Response: ${data}`);
+            } catch (error) {
+                addResult(`CORS test failed: ${error.message}`, false);
+            }
+        }
+
+        async function testEnvironment() {
+            addResult('Testing environment variables...');
+            try {
+                // This will show what the frontend thinks the API URL is
+                const apiUrl = import.meta?.env?.VITE_API_URL || 'Not set (using default)';
+                addResult(`VITE_API_URL: ${apiUrl}`);
+                
+                // Test if we can access the API from this page
+                const testUrl = apiUrl === 'Not set (using default)' ? 
+                    'http://localhost:5000' : apiUrl;
+                
+                const response = await fetch(`${testUrl}/debug`);
+                const data = await response.json();
+                addResult(`Environment API test successful: ${JSON.stringify(data)}`);
+            } catch (error) {
+                addResult(`Environment API test failed: ${error.message}`, false);
+            }
+        }
+    </script>
+</body>
+</html> 
