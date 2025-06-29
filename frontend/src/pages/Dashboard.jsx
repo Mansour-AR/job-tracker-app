@@ -215,7 +215,7 @@ export default function Dashboard() {
                 const IconComponent = status.icon;
                 
                 return (
-                  <div key={status.key} className="bg-white/80 backdrop-blur-sm rounded-lg p-4 border border-gray-200 hover:shadow-md transition-shadow">
+                  <div key={status.key} className="glass-card card-effect p-4 border border-gray-200 hover:shadow-md transition-shadow">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <IconComponent className={`h-5 w-5 ${status.color}`} />
