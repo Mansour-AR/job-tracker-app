@@ -12,9 +12,7 @@ app.get('/debug', (req, res) => {
   res.json({ 
     message: 'Express server is working!',
     timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV || 'development',
-    cors: 'enabled',
-    origin: req.headers.origin || 'no origin'
+    env: process.env.NODE_ENV || 'development'
   });
 });
 
@@ -23,22 +21,17 @@ const allowedOrigins = [
   'http://localhost:5173', // Vite dev server
   'http://localhost:3000', // Alternative dev port
   'http://localhost:4173', // Vite preview server
+  // Specific Vercel domain
+  'https://job-tracker-app-ivory.vercel.app',
   // Vercel domains (will be automatically allowed)
-  /^https:\/\/.*\.vercel\.app$/,
-  // Add your specific Vercel domain here - replace with your actual domain
-    'https://job-tracker-app-ivory.vercel.app', // Your actual Vercel domain
-  // Netlify domains (if you decide to use Netlify instead)
-  /^https:\/\/.*\.netlify\.app$/,
-  'https://your-app-name.netlify.app'  // Replace with your actual Netlify domain
+  /^https:\/\/.*\.vercel\.app$/
 ];
 
+// CORS middleware
 app.use(cors({ 
   origin: function (origin, callback) {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    
-    // Log all origins for debugging
-    console.log('Request origin:', origin);
     
     // Check if origin matches any of the allowed patterns
     const isAllowed = allowedOrigins.some(allowedOrigin => {
@@ -51,16 +44,31 @@ app.use(cors({
     });
     
     if (isAllowed) {
-      console.log('CORS: Origin allowed:', origin);
       callback(null, true);
     } else {
       console.log('CORS blocked origin:', origin);
-      console.log('Allowed origins:', allowedOrigins);
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true 
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
+
+// Additional CORS headers for preflight requests
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://job-tracker-app-ivory.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  
+  // Handle preflight requests
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
 
 // Middleware
 app.use(express.json());
