@@ -151,7 +151,7 @@ export default function Dashboard() {
   if (error) {
     return (
       <DashboardLayout>
-        <div className="h-full overflow-y-auto p-8">
+        <div className="h-full p-8">
           <div className="bg-red-50 border border-red-200 rounded-lg p-6">
             <h2 className="text-xl font-bold text-red-800 mb-2">Error Loading Dashboard</h2>
             <p className="text-red-600 mb-4">{error}</p>

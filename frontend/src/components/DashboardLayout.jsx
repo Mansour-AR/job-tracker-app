@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -15,8 +15,8 @@ const DashboardLayout = ({ children }) => {
         />
       )}
 
-      {/* Sidebar - hidden on mobile, visible on md+ */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:sticky md:top-0 md:translate-x-0 ${
+      {/* Sidebar - hidden on mobile, sticky on desktop */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:sticky md:top-0 md:h-screen md:block ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
@@ -38,8 +38,8 @@ const DashboardLayout = ({ children }) => {
           </div>
         </div>
 
-        {/* Main content area */}
-        <main className="flex-1 p-4 md:p-8 lg:p-12 overflow-y-auto">
+        {/* Main content area - no overflow-y-auto! */}
+        <main className="flex-1 p-4 md:p-8 lg:p-12">
           {children}
         </main>
       </div>
