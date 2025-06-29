@@ -4,7 +4,8 @@ import {
   TrashIcon, 
   LinkIcon, 
   DocumentTextIcon,
-  CalendarIcon
+  CalendarIcon,
+  ClockIcon
 } from '@heroicons/react/24/outline';
 
 const statusColors = {
@@ -30,59 +31,51 @@ const JobCard = ({ job, onEdit, onDelete }) => {
   const statusBgColor = statusBgColors[job.status] || 'bg-gray-100 text-gray-700';
   
   return (
-    <div className={`bg-card glass-card card-effect shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
-      <div className="flex justify-between items-start gap-2">
-        <h2 className="text-lg md:text-xl font-bold text-primary truncate flex-1">{job.title}</h2>
-        <span className={`text-xs px-2 md:px-3 py-1 rounded-full font-semibold whitespace-nowrap flex-shrink-0 ${statusBgColor}`}>
+    <div className={`bg-white shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}>
+      <div className="flex items-start justify-between gap-2">
+        <h2 className="text-lg md:text-xl font-bold text-gray-800 truncate flex-1">{job.title}</h2>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => onEdit(job)}
+            className="p-1 text-gray-600 hover:text-blue-600 transition-colors"
+            title="Edit job"
+          >
+            <PencilIcon className="h-4 w-4" />
+          </button>
+          <button
+            onClick={() => onDelete(job._id)}
+            className="p-1 text-gray-600 hover:text-red-600 transition-colors"
+            title="Delete job"
+          >
+            <TrashIcon className="h-4 w-4" />
+          </button>
+        </div>
+      </div>
+
+      <div className="text-gray-600 font-medium text-sm md:text-base">{job.company}</div>
+
+      <div className="flex items-center justify-between">
+        <span className={`px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(job.status.toLowerCase().replace(/ /g, '-'))}`}>
           {job.status}
         </span>
+        <span className="text-xs text-gray-500">
+          {new Date(job.createdAt).toLocaleDateString()}
+        </span>
       </div>
-      <div className="text-secondary font-medium text-sm md:text-base">{job.company}</div>
-      
-      {job.jobUrl && (
-        <div className="text-sm">
-          <a 
-            href={job.jobUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-accent-blue hover:text-accent-blue/80 underline truncate block flex items-center"
-          >
-            <LinkIcon className="h-4 w-4 mr-1 flex-shrink-0" />
-            <span className="truncate">View Job Posting →</span>
-          </a>
-        </div>
-      )}
-      
+
       {job.notes && (
-        <div className="text-sm text-tertiary bg-light p-3 rounded-lg">
-          <div className="font-medium text-secondary mb-1 flex items-center">
-            <DocumentTextIcon className="h-4 w-4 mr-1 flex-shrink-0" />
-            Notes:
+        <div className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">
+          <div className="font-medium text-gray-600 mb-1 flex items-center">
+            <DocumentTextIcon className="h-4 w-4 mr-2" />
+            Notes
           </div>
-          <div className="text-tertiary text-sm line-clamp-3">{job.notes}</div>
+          <div className="text-gray-500 text-sm line-clamp-3">{job.notes}</div>
         </div>
       )}
-      
-      <div className="text-tertiary text-xs mt-auto flex items-center">
-        <CalendarIcon className="h-3 w-3 mr-1 flex-shrink-0" />
-        Applied: {new Date(job.createdAt).toLocaleDateString()}
-      </div>
-      
-      <div className="flex gap-2 mt-2">
-        <button
-          onClick={() => onEdit(job)}
-          className="flex-1 bg-blue-50 text-blue-600 py-2 px-2 md:px-3 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-100 transition-colors border border-blue-200 flex items-center justify-center"
-        >
-          <PencilIcon className="h-3 w-3 md:h-4 md:w-4 mr-1" />
-          Edit
-        </button>
-        <button
-          onClick={() => onDelete(job._id)}
-          className="flex-1 bg-red-50 text-red-600 py-2 px-2 md:px-3 rounded-lg text-xs md:text-sm font-medium hover:bg-red-100 transition-colors border border-red-200 flex items-center justify-center"
-        >
-          <TrashIcon className="h-3 w-3 md:h-4 md:w-4 mr-1" />
-          Delete
-        </button>
+
+      <div className="text-gray-500 text-xs mt-auto flex items-center">
+        <ClockIcon className="h-3 w-3 mr-1" />
+        Updated {new Date(job.updatedAt).toLocaleDateString()}
       </div>
     </div>
   );

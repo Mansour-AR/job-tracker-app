@@ -171,116 +171,115 @@ export default function Dashboard() {
   const activeJobs = jobs.filter(job => !['Rejected', 'Archived'].includes(job.status)).length;
 
   return (
-    <DashboardLayout>
-      <div className="h-full">
-        <div className="mb-6 md:mb-8">
-          <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
-            <HomeIcon className="inline-block mr-2 md:mr-3 h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" />
-            Job Dashboard
-          </h1>
-          <p className="text-gray-700 mb-4 text-base md:text-lg">Welcome back, <span className="font-semibold">{user?.name || user?.email}</span></p>
-        </div>
-
-        {/* Overview Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200">
-            <DocumentTextIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">{totalJobs}</div>
-            <div className="text-secondary mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
-          </div>
-          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-green hover:scale-105 transition-transform duration-200">
-            <ClockIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-green mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-accent-green drop-shadow">{activeJobs}</div>
-            <div className="text-secondary mt-2 font-semibold text-sm md:text-base">Active Applications</div>
-          </div>
-          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
-            <ChartBarIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">
-              {totalJobs > 0 ? Math.round((activeJobs / totalJobs) * 100) : 0}%
+    <div className="min-h-screen bg-gray-100">
+      <div className="container mx-auto px-4 py-8">
+        <DashboardLayout>
+          <div className="h-full">
+            <div className="mb-6 md:mb-8">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
+                <HomeIcon className="inline-block mr-2 md:mr-3 h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" />
+                Job Dashboard
+              </h1>
+              <p className="text-gray-700 mb-4 text-base md:text-lg">Welcome back, <span className="font-semibold">{user?.name || user?.email}</span></p>
             </div>
-            <div className="text-secondary mt-2 font-semibold text-sm md:text-base">Success Rate</div>
-          </div>
-        </div>
 
-        {/* Status Breakdown */}
-        <div className="bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Job Status Overview</h2>
-          {loadingJobs ? (
-            <div className="text-tertiary text-center py-8">Loading job statistics...</div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-              {STATUS_LABELS.map(status => {
-                const count = jobs.filter(job => job.status === status.key).length;
-                const percentage = totalJobs > 0 ? Math.round((count / totalJobs) * 100) : 0;
-                const IconComponent = status.icon;
-                const statusClass = `bg-status-${status.key.toLowerCase().replace(/ /g, '-')}`;
-                return (
-                  <div 
-                    key={status.key} 
-                    className={`bg-light p-4 rounded-lg border border-light hover:shadow-md transition-shadow`}
-                  >
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <IconComponent className="h-5 w-5 text-primary" />
-                        <span className="font-semibold text-primary text-sm md:text-base">{status.label}</span>
-                      </div>
-                      <span className="text-lg md:text-xl font-bold text-primary">{count}</span>
-                    </div>
-                    <div className="w-full bg-light rounded-full h-2">
+            {/* Overview Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
+              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200">
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.totalJobs}</div>
+                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-green-500 hover:scale-105 transition-transform duration-200">
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.activeApplications}</div>
+                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Active Applications</div>
+              </div>
+              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
+                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats.successRate}%</div>
+                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Success Rate</div>
+              </div>
+            </div>
+
+            {/* Status Breakdown */}
+            <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Job Status Distribution</h2>
+              {loadingJobs ? (
+                <div className="text-gray-500 text-center py-8">Loading job statistics...</div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {STATUS_LABELS.map(status => {
+                    const count = jobs.filter(job => job.status === status.key).length;
+                    const percentage = totalJobs > 0 ? Math.round((count / totalJobs) * 100) : 0;
+                    const IconComponent = status.icon;
+                    const statusClass = `bg-status-${status.key.toLowerCase().replace(/ /g, '-')}`;
+                    return (
                       <div 
-                        className={`h-2 rounded-full ${statusClass}`}
-                        style={{ width: `${percentage}%` }}
-                      ></div>
-                    </div>
-                    <div className="text-xs text-tertiary mt-1">{percentage}%</div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-        </div>
-
-        {/* Recent Activity */}
-        <div className="bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Recent Activity</h2>
-          {loadingJobs ? (
-            <div className="text-tertiary text-center py-8">Loading recent activity...</div>
-          ) : jobs.length > 0 ? (
-            <div className="space-y-3">
-              {jobs.slice(0, 5).map(job => (
-                <div 
-                  key={job._id} 
-                  className="flex items-center justify-between p-3 bg-light rounded-lg border border-light"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold text-primary text-sm md:text-base truncate">{job.title}</span>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium bg-status-${job.status.toLowerCase().replace(/ /g, '-')} text-primary`}>{job.status}</span>
-                    </div>
-                    <div className="text-sm text-secondary">{job.company}</div>
-                  </div>
-                  <div className="text-xs text-tertiary ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
+                        key={status.key} 
+                        className={`bg-gray-50 p-4 rounded-lg border border-gray-200 hover:shadow-md transition-shadow`}
+                      >
+                        <div className="flex items-center justify-between mb-2">
+                          <IconComponent className="h-5 w-5 text-gray-600" />
+                          <span className="font-semibold text-gray-800 text-sm md:text-base">{status.label}</span>
+                        </div>
+                        <div className="flex items-center justify-between">
+                          <span className="text-lg md:text-xl font-bold text-gray-800">{count}</span>
+                          <div className="w-full bg-gray-200 rounded-full h-2 ml-4">
+                            <div
+                              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${percentage}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                        <div className="text-xs text-gray-500 mt-1">{percentage}%</div>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
+              )}
             </div>
-          ) : (
-            <div className="text-center py-8 text-tertiary">
-              <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-tertiary" />
-              <p className="text-lg">No jobs yet. Start by adding your first job application!</p>
-            </div>
-          )}
-        </div>
 
-        {/* Stats Chart */}
-        {!loadingStats && stats && (
-          <div className="glass-card card-effect p-4 md:p-6 lg:p-8">
-            <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800">Application Trends</h2>
-            <div className="w-full h-64 md:h-80">
-              <StatsChart stats={stats} />
+            {/* Recent Activity */}
+            <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+              <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6">Recent Activity</h2>
+              {loadingJobs ? (
+                <div className="text-gray-500 text-center py-8">Loading recent activity...</div>
+              ) : jobs.length > 0 ? (
+                <div className="space-y-3">
+                  {jobs.slice(0, 5).map(job => (
+                    <div 
+                      key={job._id} 
+                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="font-semibold text-gray-800 text-sm md:text-base truncate">{job.title}</span>
+                          <span className={`ml-2 px-2 py-1 text-xs rounded-full ${getStatusColor(job.status.toLowerCase().replace(/ /g, '-'))} text-gray-800`}>{job.status}</span>
+                        </div>
+                        <div className="text-sm text-gray-600">{job.company}</div>
+                      </div>
+                      <div className="text-xs text-gray-500 ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-8 text-gray-500">
+                  <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-gray-400" />
+                  <p className="text-lg">No jobs yet. Start by adding your first job application!</p>
+                </div>
+              )}
             </div>
+
+            {/* Stats Chart */}
+            {!loadingStats && stats && (
+              <div className="glass-card card-effect p-4 md:p-6 lg:p-8">
+                <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800">Application Trends</h2>
+                <div className="w-full h-64 md:h-80">
+                  <StatsChart stats={stats} />
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </DashboardLayout>
       </div>
-    </DashboardLayout>
+    </div>
   );
 } 

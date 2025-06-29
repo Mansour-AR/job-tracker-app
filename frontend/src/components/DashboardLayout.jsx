@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import { Bars3Icon } from '@heroicons/react/24/outline';
+import AuthButtons from './AuthButtons';
 
 const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
-    <div className="flex min-h-screen bg-light">
+    <div className="flex min-h-screen bg-gray-100">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -21,23 +26,25 @@ const DashboardLayout = ({ children }) => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 ml-0 md:ml-64 min-h-screen bg-light">
-        {/* Mobile header */}
-        <div className="md:hidden bg-gray-800 px-4 py-3 border-b border-gray-700">
+      <div className="flex-1 ml-0 md:ml-64 min-h-screen bg-gray-100">
+        {/* Top Navigation */}
+        <nav className="bg-white shadow-sm border-b border-gray-200 px-4 py-3 md:px-6 md:py-4">
           <div className="flex items-center justify-between">
-            <button
-              onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
-            >
-              <Bars3Icon className="h-6 w-6" />
-            </button>
-            <h1 className="text-lg font-semibold text-white">Job Tracker</h1>
-            <div className="w-10"></div>
+            <div className="flex items-center gap-3">
+              <button
+                onClick={toggleSidebar}
+                className="md:hidden p-2 rounded-lg text-gray-600 hover:bg-gray-100 transition-colors"
+              >
+                <Bars3Icon className="h-5 w-5" />
+              </button>
+              <h1 className="text-lg md:text-xl font-semibold text-gray-800">Job Tracker</h1>
+            </div>
+            <AuthButtons />
           </div>
-        </div>
+        </nav>
 
-        {/* Main content area */}
-        <main className="p-4 md:p-8 lg:p-12 w-full bg-light">
+        {/* Page Content */}
+        <main className="p-4 md:p-8 lg:p-12 w-full bg-gray-100">
           {children}
         </main>
       </div>
