@@ -183,17 +183,17 @@ export default function Dashboard() {
 
         {/* Overview Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200">
+          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200">
             <DocumentTextIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
             <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">{totalJobs}</div>
             <div className="text-text-secondary mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
           </div>
-          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-green hover:scale-105 transition-transform duration-200">
+          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-green hover:scale-105 transition-transform duration-200">
             <ClockIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-green mb-2" />
             <div className="text-2xl md:text-3xl font-extrabold text-accent-green drop-shadow">{activeJobs}</div>
             <div className="text-text-secondary mt-2 font-semibold text-sm md:text-base">Active Applications</div>
           </div>
-          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
+          <div className="bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
             <ChartBarIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
             <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">
               {totalJobs > 0 ? Math.round((activeJobs / totalJobs) * 100) : 0}%
@@ -203,7 +203,7 @@ export default function Dashboard() {
         </div>
 
         {/* Status Breakdown */}
-        <div className="bg-bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+        <div className="bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
           <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Job Status Overview</h2>
           {loadingJobs ? (
             <div className="text-text-tertiary text-center py-8">Loading job statistics...</div>
@@ -241,7 +241,7 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+        <div className="bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
           <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Recent Activity</h2>
           {loadingJobs ? (
             <div className="text-text-tertiary text-center py-8">Loading recent activity...</div>

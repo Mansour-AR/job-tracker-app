@@ -8,9 +8,9 @@ module.exports = {
     extend: {
       colors: {
         // Background Colors
-        'bg-light': '#f3f4f6',       // Page background (darker white)
-        'bg-card': '#ffffff',         // Card background (pure white)
-        'bg-sidebar': '#1e40af',     // Sidebar blue
+        'light': '#f3f4f6',       // Page background (darker white)
+        'card': '#ffffff',         // Card background (pure white)
+        'sidebar': '#1e40af',     // Sidebar blue
         
         // Text Colors
         'text-primary': '#111827',    // Primary text (almost black)
