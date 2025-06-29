@@ -217,7 +217,7 @@ export default function Dashboard() {
                 return (
                   <div 
                     key={status.key} 
-                    className={`bg-bg-light p-4 rounded-lg border border-bg-light hover:shadow-md transition-shadow`}
+                    className={`bg-light p-4 rounded-lg border border-light hover:shadow-md transition-shadow`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
@@ -226,7 +226,7 @@ export default function Dashboard() {
                       </div>
                       <span className="text-lg md:text-xl font-bold text-text-primary">{count}</span>
                     </div>
-                    <div className="w-full bg-bg-light rounded-full h-2">
+                    <div className="w-full bg-light rounded-full h-2">
                       <div 
                         className={`h-2 rounded-full ${statusClass}`}
                         style={{ width: `${percentage}%` }}
@@ -250,7 +250,7 @@ export default function Dashboard() {
               {jobs.slice(0, 5).map(job => (
                 <div 
                   key={job._id} 
-                  className="flex items-center justify-between p-3 bg-bg-light rounded-lg border border-bg-light"
+                  className="flex items-center justify-between p-3 bg-light rounded-lg border border-light"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
