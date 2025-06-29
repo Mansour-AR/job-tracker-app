@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-export const ProtectedRoute = ({ children }) => {
+const ProtectedRoute = ({ children }) => {
   // Check custom authentication state from localStorage
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
   const userEmail = localStorage.getItem('user_email');
@@ -11,4 +11,6 @@ export const ProtectedRoute = ({ children }) => {
   }
 
   return children;
-}; 
+};
+
+export default ProtectedRoute; 

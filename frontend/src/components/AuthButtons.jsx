@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-export const AuthButtons = ({ className = '' }) => {
+const AuthButtons = ({ className = '' }) => {
   const navigate = useNavigate();
   
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' && 
@@ -39,4 +39,6 @@ export const AuthButtons = ({ className = '' }) => {
       )}
     </div>
   );
-}; 
+};
+
+export default AuthButtons; 

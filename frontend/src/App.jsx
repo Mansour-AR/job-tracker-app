@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ProtectedRoute } from './components/ProtectedRoute';
-import Welcome from './pages/Welcome';
-import Dashboard from './pages/Dashboard';
-import Jobs from './pages/Jobs';
-import JobCreate from './pages/JobCreate';
-import SignInPage from './pages/SignInPage';
-import SignUpPage from './pages/SignUpPage';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Welcome from './pages/Welcome.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Jobs from './pages/Jobs.jsx';
+import JobCreate from './pages/JobCreate.jsx';
+import SignInPage from './pages/SignInPage.jsx';
+import SignUpPage from './pages/SignUpPage.jsx';
 import './App.css';
 
 function App() {
