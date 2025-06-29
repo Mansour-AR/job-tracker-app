@@ -12,7 +12,9 @@ app.get('/debug', (req, res) => {
   res.json({ 
     message: 'Express server is working!',
     timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV || 'development'
+    env: process.env.NODE_ENV || 'development',
+    cors: 'enabled',
+    origin: req.headers.origin || 'no origin'
   });
 });
 
@@ -24,7 +26,7 @@ const allowedOrigins = [
   // Vercel domains (will be automatically allowed)
   /^https:\/\/.*\.vercel\.app$/,
   // Add your specific Vercel domain here - replace with your actual domain
-  // 'https://your-actual-app-name.vercel.app', // Replace with your actual Vercel domain
+    'https://job-tracker-app-ivory.vercel.app', // Your actual Vercel domain
   // Netlify domains (if you decide to use Netlify instead)
   /^https:\/\/.*\.netlify\.app$/,
   'https://your-app-name.netlify.app'  // Replace with your actual Netlify domain
