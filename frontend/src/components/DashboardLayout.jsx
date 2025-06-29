@@ -15,8 +15,8 @@ const DashboardLayout = ({ children }) => {
         />
       )}
 
-      {/* Sidebar - hidden on mobile, sticky on desktop */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:sticky md:top-0 md:h-screen md:block ${
+      {/* Sidebar - hidden on mobile, sticky and always visible on desktop */}
+      <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out md:sticky md:top-0 md:block md:translate-x-0 ${
         sidebarOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
