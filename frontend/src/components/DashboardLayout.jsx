@@ -38,8 +38,8 @@ const DashboardLayout = ({ children }) => {
           </div>
         </div>
 
-        {/* Main content area - no overflow-y-auto! */}
-        <main className="flex-1 p-4 md:p-8 lg:p-12">
+        {/* Main content area - fill width and use consistent background */}
+        <main className="flex-1 w-full min-h-screen p-4 md:p-8 lg:p-12 bg-gradient-to-br from-blue-50 to-blue-200">
           {children}
         </main>
       </div>
