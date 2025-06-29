@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>CORS Test for Job Tracker Backend</h1>
+    
+    <button onclick="testBackend()">Test Backend Connection</button>
+    <button onclick="testCORS()">Test CORS with Login</button>
+    <button onclick="testPreflight()">Test Preflight Request</button>
+    
+    <div id="results"></div>
+
+    <script>
+        const backendUrl = 'https://job-tracker-platform.onrender.com';
+        
+        function addResult(message, isSuccess = true) {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${isSuccess ? 'success' : 'error'}`;
+            resultDiv.innerHTML = `<strong>${isSuccess ? '✅' : '❌'}</strong> ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        async function testBackend() {
+            addResult('Testing backend connection...');
+            try {
+                const response = await fetch(`${backendUrl}/debug`);
+                const data = await response.json();
+                addResult(`Backend accessible! Response: ${JSON.stringify(data)}`);
+            } catch (error) {
+                addResult(`Backend connection failed: ${error.message}`, false);
+            }
+        }
+
+        async function testCORS() {
+            addResult('Testing CORS with login endpoint...');
+            try {
+                const response = await fetch(`${backendUrl}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Origin': 'https://job-tracker-app-ivory.vercel.app'
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'testpassword'
+                    })
+                });
+                
+                const data = await response.text();
+                addResult(`CORS test completed! Status: ${response.status}, Response: ${data}`);
+            } catch (error) {
+                addResult(`CORS test failed: ${error.message}`, false);
+            }
+        }
+
+        async function testPreflight() {
+            addResult('Testing preflight request...');
+            try {
+                const response = await fetch(`${backendUrl}/auth/login`, {
+                    method: 'OPTIONS',
+                    headers: {
+                        'Origin': 'https://job-tracker-app-ivory.vercel.app',
+                        'Access-Control-Request-Method': 'POST',
+                        'Access-Control-Request-Headers': 'Content-Type'
+                    }
+                });
+                
+                addResult(`Preflight test completed! Status: ${response.status}`);
+                addResult(`CORS Headers: ${JSON.stringify({
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers')
+                })}`);
+            } catch (error) {
+                addResult(`Preflight test failed: ${error.message}`, false);
+            }
+        }
+    </script>
+</body>
+</html> 

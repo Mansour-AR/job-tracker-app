@@ -7,17 +7,7 @@ import authRouter from './routes/auth.js';
 
 const app = express();
 
-// Simple test route at the very beginning
-app.get('/debug', (req, res) => {
-  res.json({ 
-    message: 'Express server is working!',
-    timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV || 'development',
-    backendUrl: 'https://job-tracker-platform.onrender.com'
-  });
-});
-
-// CORS configuration - temporarily allow all origins for testing
+// CORS configuration - MUST BE FIRST, before any routes
 app.use(cors({
   origin: true, // Allow all origins temporarily
   credentials: true,
@@ -38,6 +28,16 @@ app.use((req, res, next) => {
   } else {
     next();
   }
+});
+
+// Simple test route at the very beginning
+app.get('/debug', (req, res) => {
+  res.json({ 
+    message: 'Express server is working!',
+    timestamp: new Date().toISOString(),
+    env: process.env.NODE_ENV || 'development',
+    backendUrl: 'https://job-tracker-platform.onrender.com'
+  });
 });
 
 // Middleware
