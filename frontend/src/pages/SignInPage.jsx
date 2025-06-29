@@ -79,24 +79,24 @@ export default function SignInPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-sm md:max-w-md">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-3 w-16 h-16 mx-auto mb-4 shadow-lg">
-            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="text-center mb-6 md:mb-8">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-2.5 md:p-3 w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 shadow-lg">
+            <svg className="w-7 h-7 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
             </svg>
           </div>
-          <h1 className="text-3xl font-extrabold text-blue-900 mb-2">Welcome Back</h1>
-          <p className="text-gray-600">Sign in to your Job Tracker account</p>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-blue-900 mb-2">Welcome Back</h1>
+          <p className="text-sm md:text-base text-gray-600">Sign in to your Job Tracker account</p>
         </div>
 
         {/* Login Form */}
-        <div className="glass-card card-effect p-8 shadow-xl">
+        <div className="glass-card card-effect p-6 md:p-8 shadow-xl">
           {successMessage && (
-            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <div className="flex items-center text-sm text-green-700">
-                <svg className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <div className="mb-4 md:mb-6 p-3 md:p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center text-xs md:text-sm text-green-700">
+                <svg className="h-3 w-3 md:h-4 md:w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
                 <span>{successMessage}</span>
@@ -105,9 +105,9 @@ export default function SignInPage() {
           )}
 
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center text-sm text-red-700">
-                <svg className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="flex items-center text-xs md:text-sm text-red-700">
+                <svg className="h-3 w-3 md:h-4 md:w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
                 <span>{error}</span>
@@ -115,15 +115,15 @@ export default function SignInPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <EnvelopeIcon className="h-5 w-5 text-gray-400" />
+                  <EnvelopeIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                 </div>
                 <input
                   id="email"
@@ -131,7 +131,7 @@ export default function SignInPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="block w-full pl-9 md:pl-10 pr-3 py-2.5 md:py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                   placeholder="Enter your email"
                 />
               </div>
@@ -139,12 +139,12 @@ export default function SignInPage() {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockClosedIcon className="h-5 w-5 text-gray-400" />
+                  <LockClosedIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                 </div>
                 <input
                   id="password"
@@ -152,7 +152,7 @@ export default function SignInPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="block w-full pl-9 md:pl-10 pr-12 py-2.5 md:py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                   placeholder="Enter your password"
                 />
                 <button
@@ -161,9 +161,9 @@ export default function SignInPage() {
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
                   {showPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeSlashIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400 hover:text-gray-600" />
                   ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400 hover:text-gray-600" />
                   )}
                 </button>
               </div>
@@ -173,27 +173,27 @@ export default function SignInPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full flex justify-center py-2.5 md:py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02]"
             >
               {isSubmitting ? 'Signing In...' : 'Sign In'}
             </button>
           </form>
 
           {/* Sign Up Button */}
-          <div className="mt-6">
+          <div className="mt-4 md:mt-6">
             <Link
               to="/sign-up"
-              className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="w-full flex justify-center py-2.5 md:py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               Create New Account
             </Link>
           </div>
 
           {/* Forgot Password Link */}
-          <div className="mt-6 text-center">
+          <div className="mt-4 md:mt-6 text-center">
             <a
               href="#"
-              className="text-sm text-blue-600 hover:text-blue-500 font-medium transition-colors duration-200"
+              className="text-xs md:text-sm text-blue-600 hover:text-blue-500 font-medium transition-colors duration-200"
             >
               Forgot your password?
             </a>

@@ -30,14 +30,14 @@ const JobCard = ({ job, onEdit, onDelete }) => {
   const statusBgColor = statusBgColors[job.status] || 'bg-gray-100 text-gray-700';
   
   return (
-    <div className={`bg-white shadow-lg rounded-lg p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
-      <div className="flex justify-between items-start">
-        <h2 className="text-xl font-bold text-gray-800 truncate flex-1 mr-2">{job.title}</h2>
-        <span className={`text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap ${statusBgColor}`}>
+    <div className={`bg-white shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
+      <div className="flex justify-between items-start gap-2">
+        <h2 className="text-lg md:text-xl font-bold text-gray-800 truncate flex-1">{job.title}</h2>
+        <span className={`text-xs px-2 md:px-3 py-1 rounded-full font-semibold whitespace-nowrap flex-shrink-0 ${statusBgColor}`}>
           {job.status}
         </span>
       </div>
-      <div className="text-gray-600 font-medium">{job.company}</div>
+      <div className="text-gray-600 font-medium text-sm md:text-base">{job.company}</div>
       
       {job.jobUrl && (
         <div className="text-sm">
@@ -47,8 +47,8 @@ const JobCard = ({ job, onEdit, onDelete }) => {
             rel="noopener noreferrer"
             className="text-blue-600 hover:text-blue-800 underline truncate block flex items-center"
           >
-            <LinkIcon className="h-4 w-4 mr-1" />
-            View Job Posting →
+            <LinkIcon className="h-4 w-4 mr-1 flex-shrink-0" />
+            <span className="truncate">View Job Posting →</span>
           </a>
         </div>
       )}
@@ -56,31 +56,31 @@ const JobCard = ({ job, onEdit, onDelete }) => {
       {job.notes && (
         <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
           <div className="font-medium text-gray-700 mb-1 flex items-center">
-            <DocumentTextIcon className="h-4 w-4 mr-1" />
+            <DocumentTextIcon className="h-4 w-4 mr-1 flex-shrink-0" />
             Notes:
           </div>
-          <div className="text-gray-600">{job.notes}</div>
+          <div className="text-gray-600 text-sm line-clamp-3">{job.notes}</div>
         </div>
       )}
       
       <div className="text-gray-400 text-xs mt-auto flex items-center">
-        <CalendarIcon className="h-3 w-3 mr-1" />
+        <CalendarIcon className="h-3 w-3 mr-1 flex-shrink-0" />
         Applied: {new Date(job.createdAt).toLocaleDateString()}
       </div>
       
       <div className="flex gap-2 mt-2">
         <button
           onClick={() => onEdit(job)}
-          className="flex-1 bg-blue-50 text-blue-600 py-2 px-3 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors border border-blue-200 flex items-center justify-center"
+          className="flex-1 bg-blue-50 text-blue-600 py-2 px-2 md:px-3 rounded-lg text-xs md:text-sm font-medium hover:bg-blue-100 transition-colors border border-blue-200 flex items-center justify-center"
         >
-          <PencilIcon className="h-4 w-4 mr-1" />
+          <PencilIcon className="h-3 w-3 md:h-4 md:w-4 mr-1" />
           Edit
         </button>
         <button
           onClick={() => onDelete(job._id)}
-          className="flex-1 bg-red-50 text-red-600 py-2 px-3 rounded-lg text-sm font-medium hover:bg-red-100 transition-colors border border-red-200 flex items-center justify-center"
+          className="flex-1 bg-red-50 text-red-600 py-2 px-2 md:px-3 rounded-lg text-xs md:text-sm font-medium hover:bg-red-100 transition-colors border border-red-200 flex items-center justify-center"
         >
-          <TrashIcon className="h-4 w-4 mr-1" />
+          <TrashIcon className="h-3 w-3 md:h-4 md:w-4 mr-1" />
           Delete
         </button>
       </div>

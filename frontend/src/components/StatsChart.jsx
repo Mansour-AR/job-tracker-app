@@ -78,14 +78,14 @@ const StatsChart = ({ stats, loading, error }) => {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 md:space-y-8">
       {/* Pie Chart */}
-      <div className="glass-card card-effect p-6">
-        <h3 className="text-xl font-bold mb-4 text-blue-800">
-          <ChartPieIcon className="inline-block mr-2 h-5 w-5" />
+      <div className="glass-card card-effect p-4 md:p-6">
+        <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">
+          <ChartPieIcon className="inline-block mr-2 h-4 w-4 md:h-5 md:w-5" />
           Status Distribution
         </h3>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={250}>
           <PieChart>
             <Pie
               data={chartData}
@@ -93,7 +93,7 @@ const StatsChart = ({ stats, loading, error }) => {
               cy="50%"
               labelLine={false}
               label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-              outerRadius={80}
+              outerRadius={60}
               fill="#8884d8"
               dataKey="value"
             >
@@ -110,22 +110,22 @@ const StatsChart = ({ stats, loading, error }) => {
       </div>
 
       {/* Bar Chart */}
-      <div className="glass-card card-effect p-6">
-        <h3 className="text-xl font-bold mb-4 text-blue-800">
-          <ChartBarIcon className="inline-block mr-2 h-5 w-5" />
+      <div className="glass-card card-effect p-4 md:p-6">
+        <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 text-blue-800">
+          <ChartBarIcon className="inline-block mr-2 h-4 w-4 md:h-5 md:w-5" />
           Jobs by Status
         </h3>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={250} className="md:h-[300px]">
           <BarChart data={barData}>
             <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
             <XAxis 
               dataKey="name" 
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 10 }}
               angle={-45}
               textAnchor="end"
-              height={80}
+              height={60}
             />
-            <YAxis tick={{ fontSize: 12 }} />
+            <YAxis tick={{ fontSize: 10 }} />
             <Tooltip 
               formatter={(value, name) => [value, 'Jobs']}
               labelFormatter={(label) => label}
@@ -140,27 +140,27 @@ const StatsChart = ({ stats, loading, error }) => {
       </div>
 
       {/* Summary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="glass-card card-effect p-4 text-center">
-          <DocumentTextIcon className="h-6 w-6 text-blue-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-blue-600">{stats.totalJobs}</div>
-          <div className="text-sm text-gray-600">Total Jobs</div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+        <div className="glass-card card-effect p-3 md:p-4 text-center">
+          <DocumentTextIcon className="h-5 w-5 md:h-6 md:w-6 text-blue-600 mx-auto mb-2" />
+          <div className="text-xl md:text-2xl font-bold text-blue-600">{stats.totalJobs}</div>
+          <div className="text-xs md:text-sm text-gray-600">Total Jobs</div>
         </div>
-        <div className="glass-card card-effect p-4 text-center">
-          <CheckCircleIcon className="h-6 w-6 text-green-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-green-600">
+        <div className="glass-card card-effect p-3 md:p-4 text-center">
+          <CheckCircleIcon className="h-5 w-5 md:h-6 md:w-6 text-green-600 mx-auto mb-2" />
+          <div className="text-xl md:text-2xl font-bold text-green-600">
             {stats.statusCounts['Offer Received'] || 0}
           </div>
-          <div className="text-sm text-gray-600">Offers Received</div>
+          <div className="text-xs md:text-sm text-gray-600">Offers Received</div>
         </div>
-        <div className="glass-card card-effect p-4 text-center">
-          <ChartBarSquareIcon className="h-6 w-6 text-purple-600 mx-auto mb-2" />
-          <div className="text-2xl font-bold text-purple-600">
+        <div className="glass-card card-effect p-3 md:p-4 text-center">
+          <ChartBarSquareIcon className="h-5 w-5 md:h-6 md:w-6 text-purple-600 mx-auto mb-2" />
+          <div className="text-xl md:text-2xl font-bold text-purple-600">
             {stats.totalJobs > 0 
               ? Math.round(((stats.statusCounts['Offer Received'] || 0) / stats.totalJobs) * 100)
               : 0}%
           </div>
-          <div className="text-sm text-gray-600">Success Rate</div>
+          <div className="text-xs md:text-sm text-gray-600">Success Rate</div>
         </div>
       </div>
     </div>

@@ -11,6 +11,7 @@ import {
   PlusIcon 
 } from '@heroicons/react/24/outline';
 import { API_ENDPOINTS } from '../config/api';
+import { Link } from 'react-router-dom';
 
 export default function Jobs() {
   const [jobs, setJobs] = useState([]);
@@ -186,29 +187,45 @@ export default function Jobs() {
 
   return (
     <DashboardLayout>
-      <div className="mb-8">
-        <h1 className="text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
-          <BriefcaseIcon className="inline-block mr-3 h-10 w-10" />
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
+          <BriefcaseIcon className="inline-block mr-2 md:mr-3 h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" />
           Your Jobs
         </h1>
-        <p className="text-gray-700 mb-4 text-lg">Manage and track your job applications</p>
+        <p className="text-gray-700 mb-4 text-base md:text-lg">Manage and track your job applications</p>
       </div>
       
-      <div className="glass-card card-effect p-8 mb-8">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-blue-800">
-            <DocumentTextIcon className="inline-block mr-2 h-6 w-6" />
+      <div className="glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 md:mb-6 gap-4">
+          <h2 className="text-xl md:text-2xl font-bold text-blue-800">
+            <DocumentTextIcon className="inline-block mr-2 h-5 w-5 md:h-6 md:w-6" />
             Job Applications
           </h2>
-          <div className="text-sm text-gray-600">
-            Total: {jobs.length} job{jobs.length !== 1 ? 's' : ''}
-          </div>
+          <Link
+            to="/jobs/new"
+            className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors text-sm md:text-base"
+          >
+            <PlusIcon className="h-4 w-4 md:h-5 md:w-5" />
+            Add New Job
+          </Link>
         </div>
         
         {loadingJobs ? (
-          <div className="text-gray-500 text-center py-12">Loading jobs...</div>
+          <div className="text-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Loading your jobs...</p>
+          </div>
         ) : error ? (
-          <div className="text-red-500 text-center py-12">{error}</div>
+          <div className="bg-red-50 border border-red-200 rounded-lg p-4 md:p-6">
+            <h3 className="text-lg font-bold text-red-800 mb-2">Error Loading Jobs</h3>
+            <p className="text-red-600 mb-4">{error}</p>
+            <button
+              onClick={fetchJobs}
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm md:text-base"
+            >
+              Retry
+            </button>
+          </div>
         ) : (
           <JobList 
             jobs={jobs} 
@@ -218,28 +235,35 @@ export default function Jobs() {
         )}
       </div>
 
-      <EditModal
-        job={editingJob}
-        isOpen={editModalOpen}
-        onClose={closeEditModal}
-        onUpdate={handleUpdateJob}
-        loading={updatingJob}
-      />
+      {/* Modals */}
+      {editModalOpen && editingJob && (
+        <EditModal
+          job={editingJob}
+          isOpen={editModalOpen}
+          onClose={closeEditModal}
+          onUpdate={handleUpdateJob}
+          updating={updatingJob}
+        />
+      )}
 
-      <DeleteConfirmationModal
-        isOpen={deleteModalOpen}
-        onClose={closeDeleteModal}
-        onConfirm={confirmDeleteJob}
-        jobTitle={jobToDelete?.title}
-        loading={deletingJob}
-      />
+      {deleteModalOpen && jobToDelete && (
+        <DeleteConfirmationModal
+          isOpen={deleteModalOpen}
+          onClose={closeDeleteModal}
+          onConfirm={confirmDeleteJob}
+          jobTitle={jobToDelete.title}
+          deleting={deletingJob}
+        />
+      )}
 
-      <Toast
-        message={toast.message}
-        type={toast.type}
-        isVisible={toast.show}
-        onClose={hideToast}
-      />
+      {/* Toast */}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
+        />
+      )}
     </DashboardLayout>
   );
 }

@@ -89,18 +89,18 @@ export default function JobCreate() {
 
   return (
     <DashboardLayout>
-      <div className="mb-8">
-        <h1 className="text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
-          <PlusIcon className="inline-block mr-3 h-10 w-10" />
+      <div className="mb-6 md:mb-8">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
+          <PlusIcon className="inline-block mr-2 md:mr-3 h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" />
           Add New Job
         </h1>
-        <p className="text-gray-700 mb-4 text-lg">Create a new job application to track</p>
+        <p className="text-gray-700 mb-4 text-base md:text-lg">Create a new job application to track</p>
       </div>
 
-      <div className="max-w-md mx-auto">
-        <div className="glass-card card-effect p-8">
-          <h2 className="text-2xl font-bold mb-6 text-blue-800 text-center">
-            <DocumentTextIcon className="inline-block mr-2 h-6 w-6" />
+      <div className="max-w-md lg:max-w-lg mx-auto">
+        <div className="glass-card card-effect p-4 md:p-6 lg:p-8">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800 text-center">
+            <DocumentTextIcon className="inline-block mr-2 h-5 w-5 md:h-6 md:w-6" />
             Job Application Form
           </h2>
           <JobForm onSubmit={handleSubmit} loading={loading} onSuccess={handleSuccess} />
@@ -109,12 +109,13 @@ export default function JobCreate() {
         </div>
       </div>
 
-      <Toast
-        message={toast.message}
-        type={toast.type}
-        isVisible={toast.show}
-        onClose={hideToast}
-      />
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={hideToast}
+        />
+      )}
     </DashboardLayout>
   );
 } 

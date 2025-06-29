@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { BriefcaseIcon, PlusIcon, ListBulletIcon, ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import { BriefcaseIcon, PlusIcon, ListBulletIcon, ArrowRightOnRectangleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
@@ -48,9 +48,33 @@ const Sidebar = () => {
     navigate('/');
   };
 
+  const handleNavClick = () => {
+    // Close sidebar on mobile when nav item is clicked
+    if (onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <aside className="h-screen w-64 bg-gradient-to-b from-blue-900 to-blue-600 text-white flex flex-col py-8 px-4 shadow-xl">
-      <div className="flex flex-col items-center mb-10">
+    <aside className="h-screen w-64 bg-gradient-to-b from-blue-900 to-blue-600 text-white flex flex-col py-4 md:py-8 px-4 shadow-xl">
+      {/* Mobile close button */}
+      <div className="flex items-center justify-between mb-6 md:hidden">
+        <div className="flex items-center">
+          <div className="bg-white rounded-full p-2 mr-3 shadow-lg">
+            <BriefcaseIcon className="h-6 w-6 text-blue-700" />
+          </div>
+          <h1 className="text-lg font-extrabold tracking-tight">Job Tracker</h1>
+        </div>
+        <button
+          onClick={onClose}
+          className="p-2 rounded-md text-white hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+        >
+          <XMarkIcon className="h-6 w-6" />
+        </button>
+      </div>
+
+      {/* Desktop header */}
+      <div className="hidden md:flex flex-col items-center mb-10">
         <div className="bg-white rounded-full p-2 mb-2 shadow-lg">
           <BriefcaseIcon className="h-8 w-8 text-blue-700" />
         </div>
@@ -61,15 +85,26 @@ const Sidebar = () => {
           </p>
         )}
       </div>
+
+      {/* User info for mobile */}
+      {user && (
+        <div className="md:hidden mb-6 p-3 bg-blue-800/50 rounded-lg">
+          <p className="text-sm text-blue-200 text-center">
+            {user.name || user.email}
+          </p>
+        </div>
+      )}
+
       <nav className="flex flex-col gap-2">
         {navItems.map(item => (
           <Link
             key={item.name}
             to={item.path}
-            className={`flex items-center gap-3 px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-blue-800/80 hover:scale-[1.03] ${location.pathname === item.path ? 'bg-white text-blue-800 shadow font-bold' : 'bg-blue-700/0'}`}
+            onClick={handleNavClick}
+            className={`flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 hover:bg-blue-800/80 hover:scale-[1.02] ${location.pathname === item.path ? 'bg-white text-blue-800 shadow font-bold' : 'bg-blue-700/0'}`}
           >
             {getIcon(item.icon)}
-            {item.name}
+            <span className="text-sm md:text-base">{item.name}</span>
           </Link>
         ))}
       </nav>
@@ -78,7 +113,7 @@ const Sidebar = () => {
       {/* Logout Button */}
       <button
         onClick={handleLogout}
-        className="flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-200 hover:bg-red-600/80 hover:scale-[1.03] bg-red-600/60 text-white mb-4"
+        className="flex items-center gap-3 px-3 md:px-4 py-2 md:py-3 rounded-lg font-medium transition-all duration-200 hover:bg-red-600/80 hover:scale-[1.02] bg-red-600/60 text-white mb-4 text-sm md:text-base"
       >
         <ArrowRightOnRectangleIcon className="h-5 w-5" />
         Log Out

@@ -67,24 +67,24 @@ export default function SignUpPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-sm md:max-w-md">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-3 w-16 h-16 mx-auto mb-4 shadow-lg">
-            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div className="text-center mb-6 md:mb-8">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-full p-2.5 md:p-3 w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 shadow-lg">
+            <svg className="w-7 h-7 md:w-10 md:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-extrabold text-blue-900 mb-2">Join Job Tracker</h1>
-          <p className="text-gray-600">Create your account to start tracking your job applications</p>
+          <h1 className="text-2xl md:text-3xl font-extrabold text-blue-900 mb-2">Join Job Tracker</h1>
+          <p className="text-sm md:text-base text-gray-600">Create your account to start tracking your job applications</p>
         </div>
 
         {/* Sign Up Form */}
-        <div className="glass-card card-effect p-8 shadow-xl">
+        <div className="glass-card card-effect p-6 md:p-8 shadow-xl">
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
-              <div className="flex items-center text-sm text-red-700">
-                <svg className="h-4 w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+            <div className="mb-4 md:mb-6 p-3 md:p-4 bg-red-50 border border-red-200 rounded-lg">
+              <div className="flex items-center text-xs md:text-sm text-red-700">
+                <svg className="h-3 w-3 md:h-4 md:w-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                 </svg>
                 <span>{error}</span>
@@ -92,15 +92,15 @@ export default function SignUpPage() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
             {/* Name Field */}
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="name" className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
                 Full Name
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <UserIcon className="h-5 w-5 text-gray-400" />
+                  <UserIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                 </div>
                 <input
                   id="name"
@@ -108,7 +108,7 @@ export default function SignUpPage() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="block w-full pl-9 md:pl-10 pr-3 py-2.5 md:py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                   placeholder="Enter your full name"
                 />
               </div>
@@ -116,12 +116,12 @@ export default function SignUpPage() {
 
             {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="email" className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
                 Email Address
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <EnvelopeIcon className="h-5 w-5 text-gray-400" />
+                  <EnvelopeIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                 </div>
                 <input
                   id="email"
@@ -129,7 +129,7 @@ export default function SignUpPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="block w-full pl-9 md:pl-10 pr-3 py-2.5 md:py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                   placeholder="Enter your email"
                 />
               </div>
@@ -137,12 +137,12 @@ export default function SignUpPage() {
 
             {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="password" className="block text-xs md:text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <LockClosedIcon className="h-5 w-5 text-gray-400" />
+                  <LockClosedIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400" />
                 </div>
                 <input
                   id="password"
@@ -150,7 +150,7 @@ export default function SignUpPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
-                  className="block w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200"
+                  className="block w-full pl-9 md:pl-10 pr-12 py-2.5 md:py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 text-sm md:text-base"
                   placeholder="Create a strong password"
                 />
                 <button
@@ -159,9 +159,9 @@ export default function SignUpPage() {
                   className="absolute inset-y-0 right-0 pr-3 flex items-center"
                 >
                   {showPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeSlashIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400 hover:text-gray-600" />
                   ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <EyeIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-400 hover:text-gray-600" />
                   )}
                 </button>
               </div>
@@ -174,29 +174,29 @@ export default function SignUpPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02]"
+              className="w-full flex justify-center py-2.5 md:py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 transform hover:scale-[1.02]"
             >
               {isSubmitting ? 'Creating Account...' : 'Create Account'}
             </button>
           </form>
 
           {/* Divider */}
-          <div className="mt-6">
+          <div className="mt-4 md:mt-6">
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300" />
               </div>
-              <div className="relative flex justify-center text-sm">
+              <div className="relative flex justify-center text-xs md:text-sm">
                 <span className="px-2 bg-white text-gray-500">Or</span>
               </div>
             </div>
           </div>
 
           {/* Sign In Button */}
-          <div className="mt-6">
+          <div className="mt-4 md:mt-6">
             <Link
               to="/sign-in"
-              className="w-full flex justify-center py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+              className="w-full flex justify-center py-2.5 md:py-3 px-4 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
             >
               Already have an account? Sign In
             </Link>
