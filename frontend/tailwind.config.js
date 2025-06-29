@@ -6,30 +6,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        // Background Colors
-        light: '#f3f4f6',       // Page background (darker white)
-        card: '#ffffff',         // Card background (pure white)
-        sidebar: '#1e40af',     // Sidebar blue
-        
-        // Text Colors
-        primary: '#111827',    // Primary text (almost black)
-        secondary: '#374151',  // Secondary text (dark gray)
-        tertiary: '#6b7280',   // Tertiary text (medium gray)
-        
-        // Status Colors
-        'status-applied': '#dbeafe',   // Light blue
-        'status-scheduled': '#dcfce7', // Light green
-        'status-interviewed': '#fef9c3', // Light yellow
-        'status-rejected': '#fee2e2',  // Light red
-        'status-offer': '#ede9fe',     // Light purple
-        'status-archived': '#f3f4f6',  // Light gray
-        
-        // Accent Colors
-        'accent-blue': '#3b82f6',     // Primary accent
-        'accent-green': '#10b981',    // Success
-        'accent-red': '#ef4444'       // Error
-      },
       fontFamily: {
         sans: ['Inter', 'sans-serif'] // Matches your Google Font import
       },
