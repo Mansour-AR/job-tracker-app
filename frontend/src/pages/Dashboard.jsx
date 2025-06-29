@@ -172,7 +172,7 @@ export default function Dashboard() {
 
   return (
     <DashboardLayout>
-      <div className="h-full overflow-y-auto">
+      <div className="h-full">
         <div className="mb-6 md:mb-8">
           <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 text-blue-900 drop-shadow">
             <HomeIcon className="inline-block mr-2 md:mr-3 h-6 w-6 md:h-8 md:w-8 lg:h-10 lg:w-10" />
