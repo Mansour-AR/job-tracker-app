@@ -1,5 +1,4 @@
 module.exports = {
-  darkMode: 'class',
   content: [
     './src/**/*.{js,jsx,ts,tsx}',
     './public/index.html',
@@ -7,41 +6,50 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        indigo: {
-          50: '#f0f4ff',
-          100: '#e0e8ff',
-          200: '#c7d2fe',
-          300: '#a5b4fc',
-          400: '#818cf8',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
-          800: '#3730a3',
-          900: '#312e81',
+        // Custom light theme palette (darker whites/grays)
+        background: {
+          light: '#f3f4f6', // Slightly darker white (matches your app.css)
+          card: '#ffffff', // Pure white cards
+          sidebar: '#1e40af', // Keeping your blue sidebar
         },
+        // Text colors that work well with darker white bg
+        text: {
+          primary: '#111827', // Almost black
+          secondary: '#374151', // Dark gray
+          tertiary: '#6b7280', // Medium gray
+        },
+        // Status colors (lighter versions)
+        status: {
+          applied: '#dbeafe', // Light blue-100
+          scheduled: '#dcfce7', // Light green-100
+          interviewed: '#fef9c3', // Light yellow-100
+          rejected: '#fee2e2', // Light red-100
+          offer: '#ede9fe', // Light purple-100
+          archived: '#f3f4f6', // Light gray-100
+        },
+        // Extended grayscale
         gray: {
-          750: '#2d3748',
-          800: '#1e293b',
-          850: '#1a202c',
-          900: '#0f172a',
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          150: '#e5e7eb',
+          200: '#d1d5db',
         },
       },
       fontFamily: {
-       
-        mono: ['"Cascadia Code"', 'monospace'],
+        sans: ['Inter', 'sans-serif'], // Matches your app.css import
       },
+      boxShadow: {
+        card: '0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06)',
+        'card-hover': '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+      },
+      // Extending animations to match app.css
       animation: {
-        'float': 'float 6s ease-in-out infinite',
         'slide-in': 'slideIn 0.3s ease-out',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
         slideIn: {
-          '0%': { transform: 'translateX(100%)', opacity: '0' },
-          '100%': { transform: 'translateX(0)', opacity: '1' },
+          from: { opacity: 0, transform: 'translateY(-10px)' },
+          to: { opacity: 1, transform: 'translateY(0)' },
         },
       },
     },
@@ -49,24 +57,30 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
+    // Custom utilities that complement app.css
     function({ addUtilities }) {
       const newUtilities = {
+        // Glass cards with white background
         '.glass-card': {
-          'background': 'rgba(255, 255, 255, 0.1)',
-          'backdrop-filter': 'blur(10px)',
-          'border': '1px solid rgba(255, 255, 255, 0.2)',
+          'background': 'rgba(255, 255, 255, 0.95)',
+          'box-shadow': '0 4px 6px -1px rgba(0, 0, 0, 0.05)',
           'border-radius': '0.5rem',
+          'border': '1px solid rgba(0, 0, 0, 0.05)',
         },
+        // Card hover effect
         '.card-effect': {
-          'transition': 'all 0.3s ease',
-          'box-shadow': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
+          'transition': 'all 0.2s ease-in-out',
+          '&:hover': {
+            'transform': 'translateY(-1px)',
+            'box-shadow': '0 10px 15px -3px rgba(0, 0, 0, 0.05)',
+          },
         },
-        '.card-effect:hover': {
-          'transform': 'translateY(-2px)',
-          'box-shadow': '0 12px 40px 0 rgba(31, 38, 135, 0.45)',
+        // Accessibility focus rings
+        '.focus-visible-ring': {
+          '@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2': {},
         },
-      }
-      addUtilities(newUtilities)
+      };
+      addUtilities(newUtilities);
     }
   ],
 };
