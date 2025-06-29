@@ -6,7 +6,7 @@ const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-gray-900">
+    <div className="flex min-h-screen bg-light">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -21,7 +21,7 @@ const DashboardLayout = ({ children }) => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 ml-0 md:ml-64 min-h-screen bg-gray-900">
+      <div className="flex-1 ml-0 md:ml-64 min-h-screen bg-light">
         {/* Mobile header */}
         <div className="md:hidden bg-gray-800 px-4 py-3 border-b border-gray-700">
           <div className="flex items-center justify-between">
@@ -37,7 +37,7 @@ const DashboardLayout = ({ children }) => {
         </div>
 
         {/* Main content area */}
-        <main className="p-4 md:p-8 lg:p-12 w-full bg-gray-900">
+        <main className="p-4 md:p-8 lg:p-12 w-full bg-light">
           {children}
         </main>
       </div>
