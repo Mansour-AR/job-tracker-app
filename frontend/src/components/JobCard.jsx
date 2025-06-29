@@ -30,14 +30,14 @@ const JobCard = ({ job, onEdit, onDelete }) => {
   const statusBgColor = statusBgColors[job.status] || 'bg-gray-100 text-gray-700';
   
   return (
-    <div className={`bg-white shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
+    <div className={`bg-bg-card glass-card card-effect shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
       <div className="flex justify-between items-start gap-2">
-        <h2 className="text-lg md:text-xl font-bold text-gray-800 truncate flex-1">{job.title}</h2>
+        <h2 className="text-lg md:text-xl font-bold text-text-primary truncate flex-1">{job.title}</h2>
         <span className={`text-xs px-2 md:px-3 py-1 rounded-full font-semibold whitespace-nowrap flex-shrink-0 ${statusBgColor}`}>
           {job.status}
         </span>
       </div>
-      <div className="text-gray-600 font-medium text-sm md:text-base">{job.company}</div>
+      <div className="text-text-secondary font-medium text-sm md:text-base">{job.company}</div>
       
       {job.jobUrl && (
         <div className="text-sm">
@@ -45,7 +45,7 @@ const JobCard = ({ job, onEdit, onDelete }) => {
             href={job.jobUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            className="text-blue-600 hover:text-blue-800 underline truncate block flex items-center"
+            className="text-accent-blue hover:text-accent-blue/80 underline truncate block flex items-center"
           >
             <LinkIcon className="h-4 w-4 mr-1 flex-shrink-0" />
             <span className="truncate">View Job Posting →</span>
@@ -54,16 +54,16 @@ const JobCard = ({ job, onEdit, onDelete }) => {
       )}
       
       {job.notes && (
-        <div className="text-sm text-gray-600 bg-gray-50 p-3 rounded-lg">
-          <div className="font-medium text-gray-700 mb-1 flex items-center">
+        <div className="text-sm text-text-tertiary bg-bg-light p-3 rounded-lg">
+          <div className="font-medium text-text-secondary mb-1 flex items-center">
             <DocumentTextIcon className="h-4 w-4 mr-1 flex-shrink-0" />
             Notes:
           </div>
-          <div className="text-gray-600 text-sm line-clamp-3">{job.notes}</div>
+          <div className="text-text-tertiary text-sm line-clamp-3">{job.notes}</div>
         </div>
       )}
       
-      <div className="text-gray-400 text-xs mt-auto flex items-center">
+      <div className="text-text-tertiary text-xs mt-auto flex items-center">
         <CalendarIcon className="h-3 w-3 mr-1 flex-shrink-0" />
         Applied: {new Date(job.createdAt).toLocaleDateString()}
       </div>

@@ -183,56 +183,56 @@ export default function Dashboard() {
 
         {/* Overview Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
-          <div className="glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-400 hover:scale-105 transition-transform duration-200">
-            <DocumentTextIcon className="h-6 w-6 md:h-8 md:w-8 text-blue-600 mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-blue-700 drop-shadow">{totalJobs}</div>
-            <div className="text-gray-700 mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
+          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200">
+            <DocumentTextIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
+            <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">{totalJobs}</div>
+            <div className="text-text-secondary mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
           </div>
-          <div className="glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-green-400 hover:scale-105 transition-transform duration-200">
-            <ClockIcon className="h-6 w-6 md:h-8 md:w-8 text-green-600 mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-green-700 drop-shadow">{activeJobs}</div>
-            <div className="text-gray-700 mt-2 font-semibold text-sm md:text-base">Active Applications</div>
+          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-green hover:scale-105 transition-transform duration-200">
+            <ClockIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-green mb-2" />
+            <div className="text-2xl md:text-3xl font-extrabold text-accent-green drop-shadow">{activeJobs}</div>
+            <div className="text-text-secondary mt-2 font-semibold text-sm md:text-base">Active Applications</div>
           </div>
-          <div className="glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-purple-400 hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
-            <ChartBarIcon className="h-6 w-6 md:h-8 md:w-8 text-purple-600 mb-2" />
-            <div className="text-2xl md:text-3xl font-extrabold text-purple-700 drop-shadow">
+          <div className="bg-bg-card glass-card card-effect p-4 md:p-6 flex flex-col items-center border-l-8 border-accent-blue hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
+            <ChartBarIcon className="h-6 w-6 md:h-8 md:w-8 text-accent-blue mb-2" />
+            <div className="text-2xl md:text-3xl font-extrabold text-accent-blue drop-shadow">
               {totalJobs > 0 ? Math.round((activeJobs / totalJobs) * 100) : 0}%
             </div>
-            <div className="text-gray-700 mt-2 font-semibold text-sm md:text-base">Success Rate</div>
+            <div className="text-text-secondary mt-2 font-semibold text-sm md:text-base">Success Rate</div>
           </div>
         </div>
 
         {/* Status Breakdown */}
-        <div className="glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800">Job Status Overview</h2>
+        <div className="bg-bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Job Status Overview</h2>
           {loadingJobs ? (
-            <div className="text-gray-500 text-center py-8">Loading job statistics...</div>
+            <div className="text-text-tertiary text-center py-8">Loading job statistics...</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {STATUS_LABELS.map(status => {
                 const count = jobs.filter(job => job.status === status.key).length;
                 const percentage = totalJobs > 0 ? Math.round((count / totalJobs) * 100) : 0;
                 const IconComponent = status.icon;
-                
+                const statusClass = `bg-status-${status.key.toLowerCase().replace(/ /g, '-')}`;
                 return (
                   <div 
                     key={status.key} 
-                    className="bg-gray-800/90 p-4 rounded-lg border border-gray-700 hover:shadow-md transition-shadow"
+                    className={`bg-bg-light p-4 rounded-lg border border-bg-light hover:shadow-md transition-shadow`}
                   >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <IconComponent className={`h-5 w-5 ${status.color}`} />
-                        <span className="font-semibold text-gray-100 text-sm md:text-base">{status.label}</span>
+                        <IconComponent className="h-5 w-5 text-text-primary" />
+                        <span className="font-semibold text-text-primary text-sm md:text-base">{status.label}</span>
                       </div>
-                      <span className="text-lg md:text-xl font-bold text-gray-100">{count}</span>
+                      <span className="text-lg md:text-xl font-bold text-text-primary">{count}</span>
                     </div>
-                    <div className="w-full bg-gray-600 rounded-full h-2">
+                    <div className="w-full bg-bg-light rounded-full h-2">
                       <div 
-                        className={`h-2 rounded-full ${status.color.replace('text-', 'bg-')}`}
+                        className={`h-2 rounded-full ${statusClass}`}
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-300 mt-1">{percentage}%</div>
+                    <div className="text-xs text-text-tertiary mt-1">{percentage}%</div>
                   </div>
                 );
               })}
@@ -241,31 +241,31 @@ export default function Dashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
-          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800">Recent Activity</h2>
+        <div className="bg-bg-card glass-card card-effect p-4 md:p-6 lg:p-8 mb-6 md:mb-8">
+          <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-accent-blue">Recent Activity</h2>
           {loadingJobs ? (
-            <div className="text-gray-500 text-center py-8">Loading recent activity...</div>
+            <div className="text-text-tertiary text-center py-8">Loading recent activity...</div>
           ) : jobs.length > 0 ? (
             <div className="space-y-3">
               {jobs.slice(0, 5).map(job => (
                 <div 
                   key={job._id} 
-                  className="flex items-center justify-between p-3 bg-gray-800/80 rounded-lg border border-gray-700"
+                  className="flex items-center justify-between p-3 bg-bg-light rounded-lg border border-bg-light"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold text-gray-100 text-sm md:text-base truncate">{job.title}</span>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusBgColors[job.status] || 'bg-gray-100 text-gray-700'}`}>{job.status}</span>
+                      <span className="font-semibold text-text-primary text-sm md:text-base truncate">{job.title}</span>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium bg-status-${job.status.toLowerCase().replace(/ /g, '-')} text-text-primary`}>{job.status}</span>
                     </div>
-                    <div className="text-sm text-gray-300">{job.company}</div>
+                    <div className="text-sm text-text-secondary">{job.company}</div>
                   </div>
-                  <div className="text-xs text-gray-400 ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
+                  <div className="text-xs text-text-tertiary ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-8 text-gray-500">
-              <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-gray-300" />
+            <div className="text-center py-8 text-text-tertiary">
+              <DocumentTextIcon className="h-12 w-12 mx-auto mb-4 text-text-tertiary" />
               <p className="text-lg">No jobs yet. Start by adding your first job application!</p>
             </div>
           )}
