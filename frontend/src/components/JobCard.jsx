@@ -32,12 +32,12 @@ const JobCard = ({ job, onEdit, onDelete }) => {
   return (
     <div className={`bg-card glass-card card-effect shadow-lg rounded-lg p-4 md:p-5 flex flex-col gap-3 border-l-8 ${borderColor} transition-transform hover:scale-[1.02] hover:shadow-xl duration-200`}> 
       <div className="flex justify-between items-start gap-2">
-        <h2 className="text-lg md:text-xl font-bold text-text-primary truncate flex-1">{job.title}</h2>
+        <h2 className="text-lg md:text-xl font-bold text-primary truncate flex-1">{job.title}</h2>
         <span className={`text-xs px-2 md:px-3 py-1 rounded-full font-semibold whitespace-nowrap flex-shrink-0 ${statusBgColor}`}>
           {job.status}
         </span>
       </div>
-      <div className="text-text-secondary font-medium text-sm md:text-base">{job.company}</div>
+      <div className="text-secondary font-medium text-sm md:text-base">{job.company}</div>
       
       {job.jobUrl && (
         <div className="text-sm">
@@ -54,16 +54,16 @@ const JobCard = ({ job, onEdit, onDelete }) => {
       )}
       
       {job.notes && (
-        <div className="text-sm text-text-tertiary bg-light p-3 rounded-lg">
-          <div className="font-medium text-text-secondary mb-1 flex items-center">
+        <div className="text-sm text-tertiary bg-light p-3 rounded-lg">
+          <div className="font-medium text-secondary mb-1 flex items-center">
             <DocumentTextIcon className="h-4 w-4 mr-1 flex-shrink-0" />
             Notes:
           </div>
-          <div className="text-text-tertiary text-sm line-clamp-3">{job.notes}</div>
+          <div className="text-tertiary text-sm line-clamp-3">{job.notes}</div>
         </div>
       )}
       
-      <div className="text-text-tertiary text-xs mt-auto flex items-center">
+      <div className="text-tertiary text-xs mt-auto flex items-center">
         <CalendarIcon className="h-3 w-3 mr-1 flex-shrink-0" />
         Applied: {new Date(job.createdAt).toLocaleDateString()}
       </div>

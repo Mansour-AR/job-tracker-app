@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 body {
-  @apply bg-light text-text-primary;
+  @apply bg-light text-primary;
 }
 
 /* Custom responsive utilities */

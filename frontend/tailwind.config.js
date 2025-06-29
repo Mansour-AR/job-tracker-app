@@ -8,14 +8,14 @@ module.exports = {
     extend: {
       colors: {
         // Background Colors
-        'light': '#f3f4f6',       // Page background (darker white)
-        'card': '#ffffff',         // Card background (pure white)
-        'sidebar': '#1e40af',     // Sidebar blue
+        light: '#f3f4f6',       // Page background (darker white)
+        card: '#ffffff',         // Card background (pure white)
+        sidebar: '#1e40af',     // Sidebar blue
         
         // Text Colors
-        'text-primary': '#111827',    // Primary text (almost black)
-        'text-secondary': '#374151',  // Secondary text (dark gray)
-        'text-tertiary': '#6b7280',   // Tertiary text (medium gray)
+        primary: '#111827',    // Primary text (almost black)
+        secondary: '#374151',  // Secondary text (dark gray)
+        tertiary: '#6b7280',   // Tertiary text (medium gray)
         
         // Status Colors
         'status-applied': '#dbeafe',   // Light blue
