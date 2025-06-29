@@ -6,7 +6,7 @@ const DashboardLayout = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-50 to-blue-200">
+    <div className="flex min-h-screen bg-gray-900">
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div 
@@ -15,29 +15,29 @@ const DashboardLayout = ({ children }) => {
         />
       )}
 
-      {/* Sidebar - fixed positioning for both mobile and desktop */}
-      <div className="fixed inset-y-0 left-0 w-64 z-50">
+      {/* Sidebar - with responsive behavior */}
+      <div className={`fixed inset-y-0 left-0 w-64 z-50 transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 transition-transform duration-300 ease-in-out`}>
         <Sidebar onClose={() => setSidebarOpen(false)} />
       </div>
 
       {/* Main content */}
-      <div className="ml-0 md:ml-64 min-h-screen w-full bg-gradient-to-br from-blue-50 to-blue-200">
-        {/* Mobile header with hamburger menu */}
-        <div className="md:hidden bg-white shadow-sm border-b border-gray-200 px-4 py-3">
+      <div className="flex-1 ml-0 md:ml-64 min-h-screen bg-gray-900">
+        {/* Mobile header */}
+        <div className="md:hidden bg-gray-800 px-4 py-3 border-b border-gray-700">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
+              className="p-2 rounded-md text-gray-300 hover:text-white hover:bg-gray-700"
             >
               <Bars3Icon className="h-6 w-6" />
             </button>
-            <h1 className="text-lg font-semibold text-gray-900">Job Tracker</h1>
-            <div className="w-10"></div> {/* Spacer for centering */}
+            <h1 className="text-lg font-semibold text-white">Job Tracker</h1>
+            <div className="w-10"></div>
           </div>
         </div>
 
-        {/* Main content area - fill width and use consistent background */}
-        <main className="p-4 md:p-8 lg:p-12 w-full">
+        {/* Main content area */}
+        <main className="p-4 md:p-8 lg:p-12 w-full bg-gray-900">
           {children}
         </main>
       </div>

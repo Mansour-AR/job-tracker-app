@@ -215,21 +215,24 @@ export default function Dashboard() {
                 const IconComponent = status.icon;
                 
                 return (
-                  <div key={status.key} className="glass-card card-effect p-4 border border-gray-200 hover:shadow-md transition-shadow">
+                  <div 
+                    key={status.key} 
+                    className="bg-gray-800/90 p-4 rounded-lg border border-gray-700 hover:shadow-md transition-shadow"
+                  >
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <IconComponent className={`h-5 w-5 ${status.color}`} />
-                        <span className="font-semibold text-gray-800 text-sm md:text-base">{status.label}</span>
+                        <span className="font-semibold text-gray-100 text-sm md:text-base">{status.label}</span>
                       </div>
-                      <span className="text-lg md:text-xl font-bold text-gray-900">{count}</span>
+                      <span className="text-lg md:text-xl font-bold text-gray-100">{count}</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="w-full bg-gray-600 rounded-full h-2">
                       <div 
                         className={`h-2 rounded-full ${status.color.replace('text-', 'bg-')}`}
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
-                    <div className="text-xs text-gray-600 mt-1">{percentage}%</div>
+                    <div className="text-xs text-gray-300 mt-1">{percentage}%</div>
                   </div>
                 );
               })}
@@ -245,19 +248,18 @@ export default function Dashboard() {
           ) : jobs.length > 0 ? (
             <div className="space-y-3">
               {jobs.slice(0, 5).map(job => (
-                <div key={job._id} className="flex items-center justify-between p-3 bg-white/60 rounded-lg border border-gray-200">
+                <div 
+                  key={job._id} 
+                  className="flex items-center justify-between p-3 bg-gray-800/80 rounded-lg border border-gray-700"
+                >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="font-semibold text-gray-900 text-sm md:text-base truncate">{job.title}</span>
-                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusBgColors[job.status] || 'bg-gray-100 text-gray-700'}`}>
-                        {job.status}
-                      </span>
+                      <span className="font-semibold text-gray-100 text-sm md:text-base truncate">{job.title}</span>
+                      <span className={`text-xs px-2 py-1 rounded-full font-medium ${statusBgColors[job.status] || 'bg-gray-100 text-gray-700'}`}>{job.status}</span>
                     </div>
-                    <div className="text-sm text-gray-600">{job.company}</div>
+                    <div className="text-sm text-gray-300">{job.company}</div>
                   </div>
-                  <div className="text-xs text-gray-500 ml-4">
-                    {new Date(job.createdAt).toLocaleDateString()}
-                  </div>
+                  <div className="text-xs text-gray-400 ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
                 </div>
               ))}
             </div>
