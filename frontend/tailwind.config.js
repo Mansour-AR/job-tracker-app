@@ -7,7 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'] // Matches your Google Font import
+        sans: ['Poppins', 'Inter', 'system-ui', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
       },
       boxShadow: {
         'card': '0 1px 3px rgba(0, 0, 0, 0.1)',

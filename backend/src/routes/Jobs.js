@@ -152,9 +152,18 @@ router.get('/stats', checkUserId, async (req, res) => {
       }
     });
     
+    // Calculate active applications (jobs that are not rejected or archived)
+    const activeApplications = totalJobs - (statusCounts['Rejected'] || 0) - (statusCounts['Archived'] || 0);
+    
+    // Calculate success rate (offers received / total jobs * 100)
+    const offersReceived = statusCounts['Offer Received'] || 0;
+    const successRate = totalJobs > 0 ? Math.round((offersReceived / totalJobs) * 100) : 0;
+    
     // Create summary object
     const summary = {
       totalJobs,
+      activeApplications,
+      successRate,
       statusCounts,
       userId: req.userId,
       timestamp: new Date().toISOString()

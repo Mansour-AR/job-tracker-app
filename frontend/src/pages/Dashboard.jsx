@@ -197,18 +197,18 @@ export default function Dashboard() {
             </div>
 
             {/* Overview Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.totalJobs || 0}</div>
-                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Total Jobs</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-6 md:mb-8">
+              <div className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200 min-h-[140px] md:min-h-[160px]">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">{stats?.totalJobs || 0}</div>
+                <div className="text-gray-600 mt-3 font-semibold text-base md:text-lg">Total Jobs</div>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-green-500 hover:scale-105 transition-transform duration-200">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.activeApplications || 0}</div>
-                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Active Applications</div>
+              <div className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col items-center border-l-8 border-green-500 hover:scale-105 transition-transform duration-200 min-h-[140px] md:min-h-[160px]">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">{stats?.activeApplications || 0}</div>
+                <div className="text-gray-600 mt-3 font-semibold text-base md:text-lg">Active Applications</div>
               </div>
-              <div className="bg-white shadow-lg rounded-lg p-4 md:p-6 flex flex-col items-center border-l-8 border-blue-500 hover:scale-105 transition-transform duration-200 sm:col-span-2 lg:col-span-1">
-                <div className="text-2xl md:text-3xl font-bold text-gray-800">{stats?.successRate || 0}%</div>
-                <div className="text-gray-600 mt-2 font-semibold text-sm md:text-base">Success Rate</div>
+              <div className="bg-white shadow-lg rounded-lg p-6 md:p-8 flex flex-col items-center border-l-8 border-purple-500 hover:scale-105 transition-transform duration-200 min-h-[140px] md:min-h-[160px] sm:col-span-2 lg:col-span-1">
+                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800">{stats?.successRate || 0}%</div>
+                <div className="text-gray-600 mt-3 font-semibold text-base md:text-lg">Success Rate</div>
               </div>
             </div>
 
@@ -223,26 +223,77 @@ export default function Dashboard() {
                     const count = jobs.filter(job => job.status === status.key).length;
                     const percentage = totalJobs > 0 ? Math.round((count / totalJobs) * 100) : 0;
                     const IconComponent = status.icon;
-                    const statusClass = `bg-status-${status.key.toLowerCase().replace(/ /g, '-')}`;
+                    
+                    // Get status-specific colors
+                    const getStatusCardColors = (statusKey) => {
+                      const colorMap = {
+                        'Applied': {
+                          bg: 'bg-blue-50',
+                          border: 'border-blue-200',
+                          icon: 'text-blue-600',
+                          progress: 'bg-blue-500',
+                          text: 'text-blue-800'
+                        },
+                        'Interview Scheduled': {
+                          bg: 'bg-green-50',
+                          border: 'border-green-200',
+                          icon: 'text-green-600',
+                          progress: 'bg-green-500',
+                          text: 'text-green-800'
+                        },
+                        'Interviewed': {
+                          bg: 'bg-amber-50',
+                          border: 'border-amber-200',
+                          icon: 'text-amber-600',
+                          progress: 'bg-amber-500',
+                          text: 'text-amber-800'
+                        },
+                        'Offer Received': {
+                          bg: 'bg-purple-50',
+                          border: 'border-purple-200',
+                          icon: 'text-purple-600',
+                          progress: 'bg-purple-500',
+                          text: 'text-purple-800'
+                        },
+                        'Rejected': {
+                          bg: 'bg-red-50',
+                          border: 'border-red-200',
+                          icon: 'text-red-600',
+                          progress: 'bg-red-500',
+                          text: 'text-red-800'
+                        },
+                        'Archived': {
+                          bg: 'bg-gray-50',
+                          border: 'border-gray-200',
+                          icon: 'text-gray-600',
+                          progress: 'bg-gray-500',
+                          text: 'text-gray-800'
+                        }
+                      };
+                      return colorMap[statusKey] || colorMap['Archived'];
+                    };
+                    
+                    const colors = getStatusCardColors(status.key);
+                    
                     return (
                       <div 
                         key={status.key} 
-                        className={`bg-gray-50 p-4 rounded-lg border border-gray-200 hover:shadow-md transition-shadow`}
+                        className={`${colors.bg} p-4 rounded-lg border ${colors.border} hover:shadow-md transition-shadow`}
                       >
                         <div className="flex items-center justify-between mb-2">
-                          <IconComponent className="h-5 w-5 text-gray-600" />
-                          <span className="font-semibold text-gray-800 text-sm md:text-base">{status.label}</span>
+                          <IconComponent className={`h-5 w-5 ${colors.icon}`} />
+                          <span className={`font-semibold text-sm md:text-base ${colors.text}`}>{status.label}</span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-lg md:text-xl font-bold text-gray-800">{count}</span>
+                          <span className={`text-lg md:text-xl font-bold ${colors.text}`}>{count}</span>
                           <div className="w-full bg-gray-200 rounded-full h-2 ml-4">
                             <div
-                              className="bg-blue-500 h-2 rounded-full transition-all duration-300"
+                              className={`${colors.progress} h-2 rounded-full transition-all duration-300`}
                               style={{ width: `${percentage}%` }}
                             ></div>
                           </div>
                         </div>
-                        <div className="text-xs text-gray-500 mt-1">{percentage}%</div>
+                        <div className={`text-xs ${colors.text} opacity-70 mt-1`}>{percentage}%</div>
                       </div>
                     );
                   })}
@@ -257,21 +308,64 @@ export default function Dashboard() {
                 <div className="text-gray-500 text-center py-8">Loading recent activity...</div>
               ) : jobs.length > 0 ? (
                 <div className="space-y-3">
-                  {jobs.slice(0, 5).map(job => (
-                    <div 
-                      key={job._id} 
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg border border-gray-200"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-semibold text-gray-800 text-sm md:text-base truncate">{job.title}</span>
-                          <span className={`ml-2 px-2 py-1 text-xs rounded-full ${getStatusColor(job.status.toLowerCase().replace(/ /g, '-'))} text-gray-800`}>{job.status}</span>
+                  {jobs.slice(0, 5).map(job => {
+                    // Get status-specific colors for recent activity
+                    const getRecentActivityStatusColors = (statusKey) => {
+                      const colorMap = {
+                        'Applied': {
+                          bg: 'bg-blue-100',
+                          text: 'text-blue-800',
+                          border: 'border-blue-200'
+                        },
+                        'Interview Scheduled': {
+                          bg: 'bg-green-100',
+                          text: 'text-green-800',
+                          border: 'border-green-200'
+                        },
+                        'Interviewed': {
+                          bg: 'bg-amber-100',
+                          text: 'text-amber-800',
+                          border: 'border-amber-200'
+                        },
+                        'Offer Received': {
+                          bg: 'bg-purple-100',
+                          text: 'text-purple-800',
+                          border: 'border-purple-200'
+                        },
+                        'Rejected': {
+                          bg: 'bg-red-100',
+                          text: 'text-red-800',
+                          border: 'border-red-200'
+                        },
+                        'Archived': {
+                          bg: 'bg-gray-100',
+                          text: 'text-gray-800',
+                          border: 'border-gray-200'
+                        }
+                      };
+                      return colorMap[statusKey] || colorMap['Archived'];
+                    };
+                    
+                    const statusColors = getRecentActivityStatusColors(job.status);
+                    
+                    return (
+                      <div 
+                        key={job._id} 
+                        className={`flex items-center justify-between p-3 ${statusColors.bg} rounded-lg border ${statusColors.border} hover:shadow-md transition-shadow`}
+                      >
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-gray-800 text-sm md:text-base truncate">{job.title}</span>
+                            <span className={`ml-2 px-2 py-1 text-xs rounded-full ${statusColors.bg} ${statusColors.text} font-medium`}>
+                              {job.status}
+                            </span>
+                          </div>
+                          <div className="text-sm text-gray-600">{job.company}</div>
                         </div>
-                        <div className="text-sm text-gray-600">{job.company}</div>
+                        <div className="text-xs text-gray-500 ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
                       </div>
-                      <div className="text-xs text-gray-500 ml-4">{new Date(job.createdAt).toLocaleDateString()}</div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-8 text-gray-500">
@@ -285,9 +379,8 @@ export default function Dashboard() {
             {!loadingStats && stats && (
               <div className="glass-card card-effect p-4 md:p-6 lg:p-8">
                 <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-blue-800">Application Trends</h2>
-                <div className="w-full h-64 md:h-80">
+
                   <StatsChart stats={stats} />
-                </div>
               </div>
             )}
           </div>

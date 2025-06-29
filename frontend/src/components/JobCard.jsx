@@ -12,13 +12,13 @@ import {
 const getStatusColor = (status) => {
   const statusColors = {
     'applied': 'bg-blue-100 text-blue-800',
-    'scheduled': 'bg-green-100 text-green-800',
+    'interview scheduled': 'bg-green-100 text-green-800',
     'interviewed': 'bg-yellow-100 text-yellow-800',
+    'offer received': 'bg-purple-100 text-purple-800',
     'rejected': 'bg-red-100 text-red-800',
-    'offer': 'bg-purple-100 text-purple-800',
     'archived': 'bg-gray-100 text-gray-800'
   };
-  return statusColors[status] || 'bg-gray-100 text-gray-800';
+  return statusColors[status.toLowerCase()] || 'bg-gray-100 text-gray-800';
 };
 
 // Border color mapping for card borders
@@ -62,7 +62,7 @@ const JobCard = ({ job, onEdit, onDelete }) => {
       <div className="text-gray-600 font-medium text-sm md:text-base">{job.company}</div>
 
       <div className="flex items-center justify-between">
-        <span className={`px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(job.status.toLowerCase().replace(/ /g, '-'))}`}>
+        <span className={`px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(job.status)}`}>
           {job.status}
         </span>
         <span className="text-xs text-gray-500">
