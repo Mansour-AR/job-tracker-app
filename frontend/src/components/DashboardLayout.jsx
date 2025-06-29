@@ -16,14 +16,12 @@ const DashboardLayout = ({ children }) => {
       )}
 
       {/* Sidebar - fixed positioning for both mobile and desktop */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 transform transition-transform duration-300 ease-in-out ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
-      }`}>
+      <div className="fixed inset-y-0 left-0 w-64 z-50">
         <Sidebar onClose={() => setSidebarOpen(false)} />
       </div>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="ml-0 md:ml-64 min-h-screen w-full bg-gradient-to-br from-blue-50 to-blue-200">
         {/* Mobile header with hamburger menu */}
         <div className="md:hidden bg-white shadow-sm border-b border-gray-200 px-4 py-3">
           <div className="flex items-center justify-between">
@@ -39,7 +37,7 @@ const DashboardLayout = ({ children }) => {
         </div>
 
         {/* Main content area - fill width and use consistent background */}
-        <main className="flex-1 w-full min-h-screen p-4 md:p-8 lg:p-12 bg-gradient-to-br from-blue-50 to-blue-200">
+        <main className="p-4 md:p-8 lg:p-12 w-full">
           {children}
         </main>
       </div>
