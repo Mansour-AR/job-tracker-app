@@ -12,19 +12,46 @@ app.get('/debug', (req, res) => {
   res.json({ 
     message: 'Express server is working!',
     timestamp: new Date().toISOString(),
-    env: process.env.NODE_ENV || 'development'
+    env: process.env.NODE_ENV || 'development',
+    backendUrl: 'https://job-tracker-platform.onrender.com'
   });
 });
 
-// CORS configuration - simplified and more permissive for debugging
+// CORS configuration - more permissive for debugging
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'http://localhost:3000',
-    'http://localhost:4173',
-    'https://job-tracker-app-ivory.vercel.app',
-    'https://*.vercel.app'
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    // Log the origin for debugging
+    console.log('Request origin:', origin);
+    
+    // Allow all Vercel domains and localhost
+    const allowedOrigins = [
+      'http://localhost:5173',
+      'http://localhost:3000',
+      'http://localhost:4173',
+      'https://job-tracker-app-ivory.vercel.app',
+      /^https:\/\/.*\.vercel\.app$/
+    ];
+    
+    const isAllowed = allowedOrigins.some(allowedOrigin => {
+      if (typeof allowedOrigin === 'string') {
+        return origin === allowedOrigin;
+      } else if (allowedOrigin instanceof RegExp) {
+        return allowedOrigin.test(origin);
+      }
+      return false;
+    });
+    
+    if (isAllowed) {
+      console.log('CORS: Origin allowed:', origin);
+      callback(null, true);
+    } else {
+      console.log('CORS blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Origin', 'Accept']
