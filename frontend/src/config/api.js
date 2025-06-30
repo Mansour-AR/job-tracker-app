@@ -18,6 +18,9 @@ export const API_ENDPOINTS = {
   
   // Helper function to get stats with user ID
   getStatsWithUser: (userId) => `${API_BASE_URL}/jobs/stats?userId=${userId}`,
+  
+  // Resume upload endpoint
+  UPLOAD_RESUME: `${API_BASE_URL}/jobs/upload-resume`,
 };
 
 export default API_ENDPOINTS; 
