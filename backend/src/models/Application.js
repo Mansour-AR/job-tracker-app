@@ -42,6 +42,10 @@ const applicationSchema = new mongoose.Schema({
   jobUrl: {
     type: String,
     trim: true
+  },
+  resumeUrl: {
+    type: String,
+    trim: true
   }
 }, {
   timestamps: true,

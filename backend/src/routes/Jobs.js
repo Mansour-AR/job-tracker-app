@@ -1,6 +1,10 @@
 import express from 'express';
 import Application from '../models/Application.js';
 import mongoose from 'mongoose';
+import multer from 'multer';
+import cloudinary from '../config/cloudinary.js';
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 const router = express.Router();
 
@@ -170,6 +174,32 @@ router.get('/stats', checkUserId, async (req, res) => {
     };
     
     res.json(summary);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Resume upload endpoint
+router.post('/upload-resume', upload.single('resume'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+    // Wrap upload_stream in a Promise
+    const streamUpload = (buffer) => {
+      return new Promise((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { resource_type: 'auto', folder: 'resumes' },
+          (error, result) => {
+            if (result) resolve(result);
+            else reject(error);
+          }
+        );
+        stream.end(buffer);
+      });
+    };
+    const result = await streamUpload(req.file.buffer);
+    return res.json({ url: result.secure_url });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
