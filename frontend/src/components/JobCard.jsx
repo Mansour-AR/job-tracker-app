@@ -87,6 +87,13 @@ const JobCard = ({ job, onEdit, onDelete }) => {
         </div>
       )}
 
+      {job.jobUrl && (
+        <div className="flex items-center gap-2 mt-1 text-xs text-blue-600">
+          <LinkIcon className="h-4 w-4" />
+          <a href={job.jobUrl} target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-800 truncate max-w-xs">Job Link</a>
+        </div>
+      )}
+
       <div className="text-gray-500 text-xs mt-auto flex items-center">
         <ClockIcon className="h-3 w-3 mr-1" />
         Updated {new Date(job.updatedAt).toLocaleDateString()}
