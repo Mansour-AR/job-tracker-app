@@ -180,27 +180,6 @@ The application will be available at:
 3. Configure build command: `npm install`
 4. Configure start command: `npm start`
 
-#### Option 2: Heroku
-
-```bash
-# Install Heroku CLI
-npm install -g heroku
-
-# Login and create app
-heroku login
-heroku create your-job-tracker-api
-
-# Add MongoDB addon
-heroku addons:create mongolab
-
-# Set environment variables
-heroku config:set NODE_ENV=production
-heroku config:set AUTH0_DOMAIN=your-domain.auth0.com
-# ... set other environment variables
-
-# Deploy
-git push heroku main
-```
 
 ### Frontend Deployment
 
@@ -209,13 +188,6 @@ git push heroku main
 1. Connect your GitHub repository to Vercel
 2. Set environment variables in Vercel dashboard
 3. Deploy automatically on push to main branch
-
-#### Option 2: Netlify
-
-1. Connect your GitHub repository to Netlify
-2. Set build command: `npm run build`
-3. Set publish directory: `dist`
-4. Configure environment variables
 
 ## 📚 API Documentation
 
@@ -309,7 +281,7 @@ We welcome contributions! Please follow these steps:
 
 ## 📄 License
 
-This project is licensed under the ISC License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 🙏 Acknowledgments
 
