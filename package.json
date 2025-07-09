@@ -1,4 +1,9 @@
 {
+  "name": "job-tracker-app",
+  "version": "1.0.0",
+  "description": "A modern, full-stack job application tracking platform built with React, Node.js, and MongoDB",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "test-root": "node test-root.js"
   },
